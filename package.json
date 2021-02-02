@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "Walmyr Filho <wlsf82@gmail.com> (https://walmyr.dev)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "protractor": "^7.0.0"
+  }
 }
