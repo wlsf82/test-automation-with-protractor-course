@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pretest": "webdriver-manager update",
     "test:chrome": "protractor config/chrome.conf.js",
     "test:chrome:ci": "protractor config/chromeHeadless.conf.js",
     "test:firefox": "protractor config/firefox.conf.js",
