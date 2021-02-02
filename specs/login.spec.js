@@ -1,3 +1,5 @@
+const EC = protractor.ExpectedConditions;
+
 describe('Login', function() {
   it('logs in successfully', function() {
     browser.get('/login')
@@ -10,6 +12,8 @@ describe('Login', function() {
     emailField.sendKeys('admin@example.com')
     passwordField.sendKeys('Passw0rd!')
     loginButton.click()
+
+    browser.wait(EC.visibilityOf(yourNotesHeading), 5000)
 
     expect(yourNotesHeading.isDisplayed()).toBe(true)
   })
