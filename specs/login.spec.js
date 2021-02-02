@@ -1,4 +1,4 @@
-const EC = protractor.ExpectedConditions;
+const helper = require('protractor-helper')
 
 describe('Login', function() {
   it('logs in successfully', function() {
@@ -9,13 +9,11 @@ describe('Login', function() {
     const loginButton = element(by.cssContainingText('button[type="submit"]', 'Login'))
     const yourNotesHeading = element(by.cssContainingText('h1', 'Your Notes'))
 
-    emailField.sendKeys('admin@example.com')
-    passwordField.sendKeys('Passw0rd!')
-    loginButton.click()
+    helper.fillFieldWithText(emailField, 'admin@example.com')
+    helper.fillFieldWithText(passwordField, 'Passw0rd!')
+    helper.click(loginButton)
 
-    browser.wait(EC.visibilityOf(yourNotesHeading), 5000)
-
-    expect(yourNotesHeading.isDisplayed()).toBe(true)
+    helper.waitForElementVisibility(yourNotesHeading)
   })
 })
 
