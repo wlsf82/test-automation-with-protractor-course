@@ -1,44 +1,34 @@
 const helper = require('protractor-helper')
+const page = require('../page-objects')
 
-describe('Login', function() {
-  let emailField
-  let passwordField
-  let loginButton
-  let yourNotesHeading
-  let logoutLink
-
+describe('Login', () => {
   beforeEach(() => {
     browser.get('login')
-    emailField = element(by.id('email'))
-    passwordField = element(by.id('password'))
-    loginButton = element(by.cssContainingText('button[type="submit"]', 'Login'))
-    yourNotesHeading = element(by.cssContainingText('h1', 'Your Notes'))
-    logoutLink = element(by.cssContainingText('.navbar-right a', 'Logout'))
   })
 
   describe('Login button verifications', () => {
     it('starts disabled', () => {
-      helper.waitForElementVisibility(loginButton)
+      helper.waitForElementVisibility(page.loginButton)
 
-      expect(loginButton.getAttribute('disabled')).toBeDefined()
+      expect(page.loginButton.getAttribute('disabled')).toBeDefined()
     })
 
     it('is kept disabled when filling only the email field', () => {
-      helper.fillFieldWithText(emailField, 'test-email@example.com')
+      helper.fillFieldWithText(page.emailField, 'test-email@example.com')
 
-      expect(loginButton.getAttribute('disabled')).toBeDefined()
+      expect(page.loginButton.getAttribute('disabled')).toBeDefined()
     })
 
     it('is kept disabled when filling only the password field', () => {
-      helper.fillFieldWithText(passwordField, 'S3creT')
+      helper.fillFieldWithText(page.passwordField, 'S3creT')
 
-      expect(loginButton.getAttribute('disabled')).toBeDefined()
+      expect(page.loginButton.getAttribute('disabled')).toBeDefined()
     })
   })
 
   describe('Erros', () => {
     it('fails when trying to login with an invalid password', () => {
-      login(process.env.USER_EMAIL, 'invalid-password')
+      page.login(process.env.USER_EMAIL, 'invalid-password')
 
       helper.waitForAlertToBePresent()
 
@@ -50,7 +40,7 @@ describe('Login', function() {
     })
 
     it('fails when trying to login with an unnexistent user', () => {
-      login('invalid-user@example.com', 'some-password')
+      page.login('invalid-user@example.com', 'some-password')
 
       helper.waitForAlertToBePresent()
 
@@ -62,22 +52,14 @@ describe('Login', function() {
     })
   })
 
-  it('logs in and out successfully', function() {
-    login()
-    helper.waitForElementVisibility(yourNotesHeading)
+  it('logs in and out successfully', () => {
+    page.login()
 
-    helper.click(logoutLink)
+    helper.waitForElementVisibility(page.yourNotesHeading)
+
+    helper.click(page.logoutLink)
 
     helper.waitForUrlToBeEqualToExpectedUrl(`${browser.baseUrl}/login`)
   })
-
-  function login(
-    email = process.env.USER_EMAIL,
-    password = process.env.USER_PASSWORD
-  ) {
-    helper.fillFieldWithText(emailField, email)
-    helper.fillFieldWithText(passwordField, password)
-    helper.click(loginButton)
-  }
 })
 
