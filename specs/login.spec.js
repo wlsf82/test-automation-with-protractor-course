@@ -36,16 +36,36 @@ describe('Login', function() {
     })
   })
 
-  it('logs in and out successfully', function() {
-    helper.fillFieldWithText(emailField, process.env.USER_EMAIL)
-    helper.fillFieldWithText(passwordField, process.env.USER_PASSWORD)
-    helper.click(loginButton)
+  describe('Erros', () => {
+    it('fails when trying to login with an invalid password', () => {
+      login(process.env.USER_EMAIL, 'invalid-password')
 
+      helper.waitForAlertToBePresent()
+
+      const alertDialog = browser.switchTo().alert()
+
+      expect(alertDialog.getText()).toEqual('Incorrect username or password.')
+
+      alertDialog.accept()
+    })
+  })
+
+  it('logs in and out successfully', function() {
+    login()
     helper.waitForElementVisibility(yourNotesHeading)
 
     helper.click(logoutLink)
 
     helper.waitForUrlToBeEqualToExpectedUrl(`${browser.baseUrl}/login`)
   })
+
+  function login(
+    email = process.env.USER_EMAIL,
+    password = process.env.USER_PASSWORD
+  ) {
+    helper.fillFieldWithText(emailField, email)
+    helper.fillFieldWithText(passwordField, password)
+    helper.click(loginButton)
+  }
 })
 
