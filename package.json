@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:chrome": "protractor config/chrome.conf.js",
+    "test:chrome:ci": "protractor config/chromeHeadless.conf.js",
+    "test:firefox": "protractor config/firefox.conf.js",
+    "test:firefox:ci": "protractor config/firefoxHeadless.conf.js"
   },
   "keywords": [],
   "author": "Walmyr Filho <wlsf82@gmail.com> (https://walmyr.dev)",
