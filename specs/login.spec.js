@@ -48,6 +48,18 @@ describe('Login', function() {
 
       alertDialog.accept()
     })
+
+    it('fails when trying to login with an unnexistent user', () => {
+      login('invalid-user@example.com', 'some-password')
+
+      helper.waitForAlertToBePresent()
+
+      const alertDialog = browser.switchTo().alert()
+
+      expect(alertDialog.getText()).toEqual('User does not exist.')
+
+      alertDialog.accept()
+    })
   })
 
   it('logs in and out successfully', function() {
