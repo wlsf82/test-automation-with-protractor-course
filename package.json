@@ -16,6 +16,7 @@
   "devDependencies": {
     "jasmine-spec-reporter": "^6.0.0",
     "protractor": "^7.0.0",
-    "protractor-helper": "^4.2.0"
+    "protractor-helper": "^4.2.0",
+    "protractor-jasmine2-html-reporter": "0.0.7"
   }
 }
