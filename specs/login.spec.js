@@ -26,7 +26,7 @@ describe('Login', () => {
     })
   })
 
-  describe('Erros', () => {
+  describe('Errors', () => {
     it('fails when trying to login with an invalid password', () => {
       page.login(process.env.USER_EMAIL, 'invalid-password')
 
