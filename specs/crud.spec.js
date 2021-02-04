@@ -12,10 +12,11 @@ describe('CRUD operations', () => {
   it('successfully CRUD a note', () => {
     const note = {
       initialContent: faker.random.words(5),
-      updatedContent: faker.random.words(6)
+      updatedContent: faker.random.words(6),
+      attachFileOnCreation: true
     }
-
-    page.createNote(note.initialContent)
+    
+    page.createNote(note)
 
     helper.waitForTextToBePresentInElement(page.notes, note.initialContent)
 

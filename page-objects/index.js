@@ -1,4 +1,6 @@
 const helper = require('protractor-helper')
+const path = require("path")
+const absolutePathOfSampleFile = path.resolve(__dirname, '../assets/sample.png')
 
 const emailField = element(by.id('email'))
 const passwordField = element(by.id('password'))
@@ -8,6 +10,7 @@ const loginLink = element(by.cssContainingText('.navbar-right a', 'Login'))
 const logoutLink = element(by.cssContainingText('.navbar-right a', 'Logout'))
 const createNewNoteLink = element(by.css('.list-group [href="/notes/new"]'))
 const textArea = element(by.id('content'))
+const fileInput = element(by.id('file'))
 const createButton = element(by.cssContainingText('button[type="submit"]', 'Create'))
 const saveButton = element(by.cssContainingText('button[type="submit"]', 'Save'))
 const deleteButton = element(by.cssContainingText('.btn-danger', 'Delete'))
@@ -23,7 +26,12 @@ function login(
 }
 
 function createNote(note) {
-  helper.fillFieldWithText(textArea, note)
+  helper.fillFieldWithText(textArea, note.initialContent)
+
+  if (note.attachFileOnCreation) {
+    helper.uploadFileIntoInputField(fileInput, absolutePathOfSampleFile)
+  }
+
   helper.click(createButton)
 }
 
