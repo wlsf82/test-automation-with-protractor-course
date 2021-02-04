@@ -9,29 +9,31 @@ describe('CRUD operations', () => {
     helper.click(page.createNewNoteLink)
   })
 
-  it('successfully CRUD a note', () => {
-    const note = {
-      initialContent: faker.random.words(5),
-      updatedContent: faker.random.words(6),
-      attachFileOnCreation: true
-    }
-    
-    page.createNote(note)
+  Array(3).fill().map(() => {
+    fit('successfully CRUD a note', () => {
+      const note = {
+        initialContent: faker.random.words(5),
+        updatedContent: faker.random.words(6),
+        attachFileOnCreation: true
+      }
 
-    helper.waitForTextToBePresentInElement(page.notes, note.initialContent)
+      page.createNote(note)
 
-    page.openNote(note.initialContent)
-    page.editNote(note)
+      helper.waitForTextToBePresentInElement(page.notes, note.initialContent)
 
-    helper.waitForTextNotToBePresentInElement(page.notes, note.initialContent)
-    helper.waitForTextToBePresentInElement(page.notes, note.updatedContent)
+      page.openNote(note.initialContent)
+      page.editNote(note)
 
-    page.openNote(note.updatedContent)
-    page.deleteNote()
+      helper.waitForTextNotToBePresentInElement(page.notes, note.initialContent)
+      helper.waitForTextToBePresentInElement(page.notes, note.updatedContent)
 
-    helper.waitForTextNotToBePresentInElement(page.notes, note.updatedContent)
+      page.openNote(note.updatedContent)
+      page.deleteNote()
 
-    helper.click(page.logoutLink)
-    helper.waitForElementVisibility(page.loginLink)
+      helper.waitForTextNotToBePresentInElement(page.notes, note.updatedContent)
+
+      helper.click(page.logoutLink)
+      helper.waitForElementVisibility(page.loginLink)
+    })
   })
 })
