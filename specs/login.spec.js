@@ -51,15 +51,5 @@ describe('Login', () => {
       alertDialog.accept()
     })
   })
-
-  it('logs in and out successfully', () => {
-    page.login()
-
-    helper.waitForElementVisibility(page.yourNotesHeading)
-
-    helper.click(page.logoutLink)
-
-    helper.waitForUrlToBeEqualToExpectedUrl(`${browser.baseUrl}/login`)
-  })
 })
 
