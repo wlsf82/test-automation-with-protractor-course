@@ -21,7 +21,6 @@ module.exports = providedConfig => {
   const defaultConfig = {
     baseUrl: 'https://notes-serverless-app.com',
     specs: ['../specs/*.spec.js'],
-    highlightDelay: 1000,
     onPrepare: () => {
       browser.driver.manage().window().maximize()
       browser.waitForAngularEnabled(false)
